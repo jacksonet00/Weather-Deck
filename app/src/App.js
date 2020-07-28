@@ -26,8 +26,12 @@ const Title = styled.h1`
 
 class App extends Component {
 	state = {
-		cities: {},
+		cities: JSON.parse(localStorage.getItem('weather-deck-cities')) || {},
 	};
+
+	componentDidMount() {
+		this.updateAll();
+	}
 
 	render() {
 		return (
@@ -88,7 +92,12 @@ class App extends Component {
 				console.log(res);
 				let cities = this.state.cities;
 				cities[zip] = res;
-				this.setState({ cities });
+				this.setState({ cities }, () => {
+					localStorage.setItem(
+						'weather-deck-cities',
+						JSON.stringify(this.state.cities)
+					);
+				});
 			});
 	};
 
