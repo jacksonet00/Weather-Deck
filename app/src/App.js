@@ -29,18 +29,34 @@ class App extends Component {
 		cities: {},
 	};
 
-	url = 'http://api.openweathermap.org/data/2.5/weather?';
-
 	render() {
 		return (
 			<Stack vertical={true}>
 				<Stack>
-					<Button> Add </Button>
-					<Button onClick={() => this.update('32256')}>
+					<input
+						type="text"
+						id="zip-code-input"
+						placeholder="Enter Zip Code"
+						onKeyPress={this.enterPressed.bind(this)}
+					/>
+					<Button
+						id="add-btn"
+						onClick={() =>
+							this.add(
+								document.getElementById(
+									'zip-code-input'
+								).value
+							)
+						}
+					>
+						{' '}
+						Add{' '}
+					</Button>
+					<Button onClick={() => this.updateAll()}>
 						{' '}
 						Refresh{' '}
 					</Button>
-					<Title color={'red'}> Weather Deck </Title>
+					<Title></Title>
 				</Stack>
 				<Stack>
 					{Object.keys(this.state.cities).map((key) => {
@@ -56,15 +72,37 @@ class App extends Component {
 		);
 	}
 
-	update = async (zip) => {
-		fetch(`${this.url}zip=${zip}&appid=${secretKeys.api_key}`)
+	add = async (zip) => {
+		this.updateCityData(zip);
+		document.getElementById('zip-code-input').value = '';
+	};
+
+	updateCityData = async (zip) => {
+		fetch(
+			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${secretKeys.api_key}`
+		)
 			.then((res) => {
 				return res.json();
 			})
 			.then((res) => {
 				console.log(res);
-				this.setState({ cities: { zip: res } });
+				let cities = this.state.cities;
+				cities[zip] = res;
+				this.setState({ cities });
 			});
+	};
+
+	updateAll = async () => {
+		Object.keys(this.state.cities).forEach((zip) => {
+			this.updateCityData(zip);
+		});
+	};
+
+	enterPressed = (event) => {
+		var code = event.keyCode || event.which;
+		if (code === 13) {
+			document.getElementById('add-btn').click();
+		}
 	};
 }
 
