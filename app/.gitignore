@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # secret keys
-secret.js
+app-env
 
 # dependencies
 /node_modules
