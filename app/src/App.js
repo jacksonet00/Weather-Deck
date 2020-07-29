@@ -77,8 +77,10 @@ class App extends Component {
 	}
 
 	add = async (zip) => {
-		this.updateCityData(zip);
-		document.getElementById('zip-code-input').value = '';
+		if (this.validateZip(zip)) {
+			this.updateCityData(zip);
+			document.getElementById('zip-code-input').value = '';
+		}
 	};
 
 	updateCityData = async (zip) => {
@@ -105,6 +107,11 @@ class App extends Component {
 		Object.keys(this.state.cities).forEach((zip) => {
 			this.updateCityData(zip);
 		});
+	};
+
+	validateZip = (zip) => {
+		const pattern = /^\d{5}(?:[-\s]\d{4})?$/;
+		return pattern.test(zip);
 	};
 
 	enterPressed = (event) => {
