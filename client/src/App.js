@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import WeatherCard from './components/WeatherCard';
+import { API } from 'aws-amplify';
 
 const Stack = styled.div`
 	display: flex;
@@ -82,10 +83,14 @@ class App extends Component {
 		}
 	};
 
-	updateCityData = async (zip) => {
-		fetch(
-			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${process.env.REACT_APP_API_KEY}`
-		)
+	updateCityData = (zipCode) => {
+		const myInit = {
+			body: {
+				zipCode: zipCode,
+			},
+		};
+
+		API.post('weatherAPI', '/weather', myInit)
 			.then((res) => {
 				return res.json();
 			})
@@ -99,6 +104,12 @@ class App extends Component {
 						JSON.stringify(this.state.cities)
 					);
 				});
+			})
+			.catch((e) => {
+				console.log(e);
+			})
+			.finally(() => {
+				console.log('fetched data');
 			});
 	};
 

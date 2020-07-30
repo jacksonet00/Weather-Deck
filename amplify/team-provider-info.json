@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-weatherdeck-dev-153653-authRole",
+            "UnauthRoleArn": "arn:aws:iam::595723023717:role/amplify-weatherdeck-dev-153653-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::595723023717:role/amplify-weatherdeck-dev-153653-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-weatherdeck-dev-153653-deployment",
+            "UnauthRoleName": "amplify-weatherdeck-dev-153653-unauthRole",
+            "StackName": "amplify-weatherdeck-dev-153653",
+            "StackId": "arn:aws:cloudformation:us-east-1:595723023717:stack/amplify-weatherdeck-dev-153653/06616a00-d29c-11ea-a4aa-12695902b27f",
+            "AmplifyAppId": "d16lulpt4ww33r"
+        }
+    }
+}
