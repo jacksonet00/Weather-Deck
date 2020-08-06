@@ -10,6 +10,14 @@
             "StackName": "amplify-weatherdeck-dev-153653",
             "StackId": "arn:aws:cloudformation:us-east-1:595723023717:stack/amplify-weatherdeck-dev-153653/06616a00-d29c-11ea-a4aa-12695902b27f",
             "AmplifyAppId": "d16lulpt4ww33r"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d16lulpt4ww33r",
+                    "type": "cicd"
+                }
+            }
         }
     }
 }
