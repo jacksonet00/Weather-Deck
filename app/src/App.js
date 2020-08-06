@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import WeatherCard from './components/WeatherCard';
-import secretKeys from './secret';
 
 const Stack = styled.div`
 	display: flex;
@@ -85,7 +84,7 @@ class App extends Component {
 
 	updateCityData = async (zip) => {
 		fetch(
-			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${secretKeys.api_key}`
+			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${process.env.REACT_APP_API_KEY}`
 		)
 			.then((res) => {
 				return res.json();
