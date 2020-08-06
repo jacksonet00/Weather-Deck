@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import WeatherCard from './components/WeatherCard';
-import { API } from 'aws-amplify';
+import secretKeys from './secret';
 
 const Stack = styled.div`
 	display: flex;
@@ -26,7 +26,7 @@ const Title = styled.h1`
 
 class App extends Component {
 	state = {
-		cities: {},
+		cities: JSON.parse(localStorage.getItem('weather-deck-cities')) || {},
 	};
 
 	componentDidMount() {
@@ -83,14 +83,10 @@ class App extends Component {
 		}
 	};
 
-	updateCityData = (zipCode) => {
-		const myInit = {
-			body: {
-				zipCode: zipCode,
-			},
-		};
-
-		API.post('weatherAPI', '/weather', myInit)
+	updateCityData = async (zip) => {
+		fetch(
+			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${secretKeys.api_key}`
+		)
 			.then((res) => {
 				return res.json();
 			})
@@ -104,12 +100,6 @@ class App extends Component {
 						JSON.stringify(this.state.cities)
 					);
 				});
-			})
-			.catch((e) => {
-				console.log(e);
-			})
-			.finally(() => {
-				console.log('fetched data');
 			});
 	};
 
