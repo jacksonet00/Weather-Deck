@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 const Card = styled.div`
@@ -24,21 +26,46 @@ const Title = styled.h1`
 		`};
 `;
 
-class WeatherCard extends Component {
-	render() {
-		return (
-			<Card>
-				<Title>{this.props.data.name}</Title>
-				<Title color={'black'}>
-					{this.kelvinToFahrenheit(this.props.data.main.temp)}°
-				</Title>
-			</Card>
-		);
-	}
+const WeatherCard = ({ zip }) => {
+	const [loading, setLoading] = useState(true);
+	const [data, setData] = useState({});
 
-	kelvinToFahrenheit = (temp) => {
+	const fetchData = async () => {
+		/*fetch(
+			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${process.env.REACT_APP_API_KEY}`
+		)
+			.then((res) => res.json())
+			.then((data) => {
+				setData(data);
+				setLoading(false);
+			});*/
+		setData({
+			name: 'test',
+			main: {
+				temp: '999',
+			},
+		});
+		setLoading(false);
+	};
+
+	useEffect(() => {
+		fetchData();
+	}, [zip]);
+
+	const kelvinToFahrenheit = (temp) => {
 		return Math.round(temp * 1.8 - 459.67);
 	};
-}
+
+	return !loading ? (
+		<Card>
+			<Title>{data.name}</Title>
+			<Title color={'black'}>
+				{kelvinToFahrenheit(data.main.temp)}°
+			</Title>
+		</Card>
+	) : (
+		<></>
+	);
+};
 
 export default WeatherCard;

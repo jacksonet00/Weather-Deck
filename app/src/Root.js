@@ -4,14 +4,21 @@ import App from './routes/App';
 import SignIn from './routes/SignIn';
 import { AuthProvider } from './config/Auth';
 import PrivateRoute from './routes/PrivateRoute';
+import { FirebaseDatabaseProvider } from '@react-firebase/database';
+import firebase from 'firebase';
+import config from './config/firebase';
+import SignUp from './routes/SignUp';
 
 const Root = () => {
 	return (
 		<AuthProvider>
-			<Router>
-				<PrivateRoute exact path="/" component={App} />
-				<Route exact path="/login" component={SignIn} />
-			</Router>
+			<FirebaseDatabaseProvider firebase={firebase} {...config}>
+				<Router>
+					<PrivateRoute exact path="/" component={App} />
+					<Route exact path="/login" component={SignIn} />
+					<Route exact path="/signup" component={SignUp} />
+				</Router>
+			</FirebaseDatabaseProvider>
 		</AuthProvider>
 	);
 };
