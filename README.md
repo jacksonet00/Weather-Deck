@@ -1,11 +1,11 @@
 # Weather Deck
 
-A weather app for the web made with React.
+A weather app for the web made with React, [Try it out][1]!
 
-## Start Script
+![Main Screen](./readme_assets/weather-deck-main.png)
 
-```
-cd app
-source app-env
-npm start
-```
+## Functionality
+
+-    Customize your own weather dashboard by adding a user-specific list of cities.
+
+[1]: https://weather-deck.web.app

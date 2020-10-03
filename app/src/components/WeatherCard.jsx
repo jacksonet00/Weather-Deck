@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import keys from '../config/secret';
 
 const Card = styled.div`
 	display: flex;
@@ -31,26 +32,26 @@ const WeatherCard = ({ zip }) => {
 	const [data, setData] = useState({});
 
 	const fetchData = async () => {
-		/*fetch(
-			`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${process.env.REACT_APP_API_KEY}`
+		fetch(
+			`https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${keys.wApiKey}`
 		)
 			.then((res) => res.json())
 			.then((data) => {
 				setData(data);
 				setLoading(false);
-			});*/
-		setData({
+			});
+		/*setData({
 			name: 'test',
 			main: {
 				temp: '999',
 			},
 		});
-		setLoading(false);
+		setLoading(false);*/
 	};
 
 	useEffect(() => {
 		fetchData();
-	}, [zip]);
+	}, []);
 
 	const kelvinToFahrenheit = (temp) => {
 		return Math.round(temp * 1.8 - 459.67);
