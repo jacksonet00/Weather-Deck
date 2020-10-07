@@ -60,6 +60,7 @@ const App = (props) => {
 		} else if (cityList.includes(city)) {
 			setCity('');
 		}
+		window.location.reload();
 	};
 
 	const validateZip = (zip) => {
