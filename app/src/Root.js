@@ -8,6 +8,7 @@ import { FirebaseDatabaseProvider } from '@react-firebase/database';
 import firebase from 'firebase';
 import config from './config/firebase';
 import SignUp from './routes/SignUp';
+import ForgotPassword from './routes/ForgotPassword';
 
 const Root = () => {
 	return (
@@ -15,6 +16,11 @@ const Root = () => {
 			<FirebaseDatabaseProvider firebase={firebase} {...config}>
 				<Router>
 					<PrivateRoute exact path="/" component={App} />
+					<Route
+						exact
+						path="/forgot-password"
+						component={ForgotPassword}
+					/>
 					<Route exact path="/login" component={SignIn} />
 					<Route exact path="/signup" component={SignUp} />
 				</Router>

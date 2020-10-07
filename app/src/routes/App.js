@@ -8,6 +8,7 @@ import {
 } from '@react-firebase/database';
 import app from '../config/firebase';
 import { v4 as uuidv4 } from 'uuid';
+import '../styles/app.css';
 
 const AppDataLayer = () => {
 	const stringifyEmail = (email) => {
@@ -100,7 +101,7 @@ const App = (props) => {
 					Sign Out
 				</Button>
 			</Stack>
-			<Stack noPadding>{renderCards()}</Stack>
+			<div className="card-grid">{renderCards()}</div>
 		</Stack>
 	);
 };

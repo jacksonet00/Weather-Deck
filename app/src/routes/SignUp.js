@@ -113,8 +113,8 @@ const SignUp = ({ history, onInit }) => {
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
 			<div className={classes.paper}>
-				<Typography component="h1" variant="h5">
-					Sign Up
+				<Typography component="h1" variant="h4">
+					Weather Deck
 				</Typography>
 				<form className={classes.form} onSubmit={handleSignUp}>
 					<Grid container spacing={2}>
@@ -152,6 +152,13 @@ const SignUp = ({ history, onInit }) => {
 						Sign Up
 					</Button>
 				</form>
+				<Grid container>
+					<Grid item xs>
+						<Link variant="body2" href="/login">
+							Already have an account? Log In.
+						</Link>
+					</Grid>
+				</Grid>
 			</div>
 			<Box mt={5}>
 				<Copyright />

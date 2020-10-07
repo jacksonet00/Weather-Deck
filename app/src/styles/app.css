@@ -1,0 +1,38 @@
+:root {
+	--column-count: 6;
+}
+
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--column-count), 1fr);
+}
+
+@media (max-width: 1470px) {
+	:root {
+		--column-count: 5;
+	}
+}
+
+@media (max-width: 1235px) {
+	:root {
+		--column-count: 4;
+	}
+}
+
+@media (max-width: 1000px) {
+	:root {
+		--column-count: 3;
+	}
+}
+
+@media (max-width: 760px) {
+	:root {
+		--column-count: 2;
+	}
+}
+
+@media (max-width: 520px) {
+	:root {
+		--column-count: 1;
+	}
+}

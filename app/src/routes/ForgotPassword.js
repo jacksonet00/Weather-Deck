@@ -1,6 +1,5 @@
 import React, { useCallback, useContext } from 'react';
 import { withRouter, Redirect } from 'react-router';
-import app from '../config/firebase';
 import { AuthContext } from '../config/Auth';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import firebase from 'firebase';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -45,18 +45,13 @@ const Copyright = () => {
 	);
 };
 
-const Login = ({ history }) => {
-	const handleLogin = useCallback(
+const PasswordReset = ({ history }) => {
+	const handleReset = useCallback(
 		async (event) => {
 			event.preventDefault();
-			const { email, password } = event.target.elements;
+			const { email } = event.target.elements;
 			try {
-				await app
-					.auth()
-					.signInWithEmailAndPassword(
-						email.value,
-						password.value
-					);
+				await firebase.auth().sendPasswordResetEmail(email.value);
 				history.push('/');
 			} catch (error) {
 				alert(error);
@@ -77,9 +72,9 @@ const Login = ({ history }) => {
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Typography component="h1" variant="h4">
-					Weather Deck
+					Forgot Password?
 				</Typography>
-				<form className={classes.form} onSubmit={handleLogin}>
+				<form className={classes.form} onSubmit={handleReset}>
 					<TextField
 						variant="outlined"
 						margin="normal"
@@ -91,17 +86,6 @@ const Login = ({ history }) => {
 						autoComplete="email"
 						autoFocus
 					/>
-					<TextField
-						variant="outlined"
-						margin="normal"
-						required
-						fullWidth
-						name="password"
-						label="Password"
-						type="password"
-						id="password"
-						autoComplete="current-password"
-					/>
 					<Button
 						type="submit"
 						fullWidth
@@ -109,20 +93,12 @@ const Login = ({ history }) => {
 						color="primary"
 						className={classes.submit}
 					>
-						Sign In
+						Send Reset Link
 					</Button>
-					<Grid container direction="row">
+					<Grid container>
 						<Grid item xs>
-							<Link variant="body2" href="/signup">
-								Create a new account.
-							</Link>
-						</Grid>
-						<Grid item xs>
-							<Link
-								href="/forgot-password"
-								variant="body2"
-							>
-								Forgot password?
+							<Link href="/login" variant="body2">
+								Back to login
 							</Link>
 						</Grid>
 					</Grid>
@@ -135,4 +111,4 @@ const Login = ({ history }) => {
 	);
 };
 
-export default withRouter(Login);
+export default withRouter(PasswordReset);
